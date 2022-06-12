@@ -1,0 +1,40 @@
+{% extends 'basic.html' %}
+{% block title %} My Cart {% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="row g-5 my-5">
+      <div class="col-md-12 col-lg-12 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-secondary">{{user.username}}'s Cart</span>
+          <span class="badge bg-secondary rounded-pill">{{ user.get_cart_count }}</span>
+        </h4>
+        <ul class="list-group mb-3">
+
+
+        {% for item in cart.cart_items.all %}
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">{{ item.pizza.name }} <a href="{% url 'DeleteFromCart' item.pizza.uid %}" class="text-secondary">X</a></h6>
+              <small class="text-muted">{{ item.pizza.desc }}</small>
+            </div>
+            <span class="text-muted">₹{{ item.pizza.price }}</span>
+          </li>
+        {% endfor %}
+
+
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (INR)</span>
+            <strong>₹{{ cart.get_total|floatformat:2 }}</strong>
+          </li>
+        </ul>
+        {% if cart.get_total %}
+        <a href="{{ payment_url }}" class="btn btn-secondary" style="float: right!important;">Pay Now</a>
+        {% else %}
+        <p class="text-muted">Your cart is empty at the moment! <a class="text-secondary" href="/">Add</a> some items!</p>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

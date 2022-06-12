@@ -1,0 +1,57 @@
+{% extends 'basic.html' %}
+{% block title %} Register {% endblock %}
+{% block style %}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+{% endblock %}
+{% block body %}
+<div class="text-center container my-5">
+<main class="form-signin w-100 m-auto">
+  <form class="needs-validation" method="post" action="/register/" novalidate>
+        {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal">Register below!</h1>
+    <div class="form-floating my-2">
+      <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
+      <label for="username">Username</label>
+      <div class="invalid-feedback">
+        Please enter a username.
+      </div>
+    </div>
+    <div class="form-floating my-1">
+      <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" required>
+      <label for="email">Email address</label>
+      <div class="invalid-feedback">
+        Please enter a valid email id.
+      </div>
+    </div>
+    <div class="form-floating my-2">
+      <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+      <label for="password">Password</label>
+       <div class="invalid-feedback">
+        Please enter a password.
+      </div>
+    </div>
+    <button class="w-100 btn btn-lg btn-secondary" type="submit">Sign up</button>
+  </form>
+</main>
+</div>
+{% endblock %}
